@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Name</key>
+		<string>Carbon</string>
+		<key>Symbol</key>
+		<string>C</string>
+		<key>Size</key>
+		<integer>4</integer>
+		<key>Color</key>
+		<string>#1b2424</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Oxygen</string>
+		<key>Symbol</key>
+		<string>O</string>
+		<key>Size</key>
+		<integer>2</integer>
+		<key>Color</key>
+		<string>#d7edf3</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Hydrogen</string>
+		<key>Symbol</key>
+		<string>H</string>
+		<key>Size</key>
+		<integer>3</integer>
+		<key>Color</key>
+		<string>#bb354b</string>
+	</dict>
+</array>
+</plist>
