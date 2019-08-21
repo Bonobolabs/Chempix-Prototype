@@ -30,20 +30,27 @@
     float number_of_points = 30;
     float point_spacing = grid_size / number_of_points;
     
+    //four corners
+    [self generatePointAtX:-grid_size/2 Z:-grid_size/2];
+    [self generatePointAtX:grid_size/2 Z:-grid_size/2];
+    [self generatePointAtX:-grid_size/2 Z:grid_size/2];
+    [self generatePointAtX:grid_size/2 Z:grid_size/2];
+
+    
     float x = -grid_size/2;
     float z = -grid_size/2;
     
-    for(int i = 0; i < number_of_points; i++)
-    {
-        for(int i = 0; i < number_of_points; i++)
-        {
-            [self generatePointAtX:x Z:z];
-            x += point_spacing;
-        }
-        
-        x = -grid_size/2;
-        z += point_spacing;
-    }
+//    for(int i = 0; i < number_of_points; i++)
+//    {
+//        for(int i = 0; i < number_of_points; i++)
+//        {
+//            [self generatePointAtX:x Z:z];
+//            x += point_spacing;
+//        }
+//
+//        x = -grid_size/2;
+//        z += point_spacing;
+//    }
     
     self.name = @"Reference Grid";
 
@@ -79,7 +86,7 @@
     self.isVisible = YES;
     [self.containerNode removeAllActions];
     
-    SCNAction *wait = [SCNAction waitForDuration:0.2];
+    SCNAction *wait = [SCNAction waitForDuration:0.05];
     SCNAction *fade = [SCNAction fadeOpacityTo:0.5 duration:1];
     SCNAction *fadein = [SCNAction sequence:@[wait, fade]];
     [self.containerNode runAction:fadein];

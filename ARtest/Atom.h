@@ -22,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) SCNVector3 atomCoordinates;
 @property (nonatomic, strong) SCNMaterial *atomMaterial;
 
+@property (nonatomic, strong) NSMutableArray *bondsArray;
+@property (nonatomic, strong) NSMutableArray *bondThresholds;
+
 
 -(void)generate;
 

@@ -20,12 +20,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isSelected;
 @property (nonatomic, readwrite) float viewingScale;
 
+@property (nonatomic, readwrite) float moleculeSizeX;
+@property (nonatomic, readwrite) float moleculeSizeY;
+@property (nonatomic, readwrite) float moleculeSizeZ;
+
+
 @property (nonatomic, strong) SCNNode *containerNode;
 @property (nonatomic, assign) SCNVector3 moleculeCalculatedCenter;
 @property (nonatomic, strong) NSMutableArray *atomsArray;
 
 -(void)addAtomOfElement:(NSString*)element withId:(NSInteger)atomId atX:(float)x Y:(float)y Z:(float)z;
 -(void)addBondBetween:(NSInteger)first and:(NSInteger)second;
+-(void)generateBonds;
 
 -(void)initialise;
 -(void)animateSpin:(BOOL)animate;

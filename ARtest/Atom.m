@@ -13,6 +13,9 @@
 
 -(void)generate
 {
+    self.bondsArray = [[NSMutableArray alloc] init];
+    self.bondThresholds = [[NSMutableArray alloc] init];
+
     //prepare paths and load file
     NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0];
@@ -28,15 +31,16 @@
         if ([self.atomElement isEqualToString:[element objectForKey:@"Name"]])
         {
             self.atomColor = [UIColor colorFromHexString:[element objectForKey:@"Color"]];
-            self.atomSize = [[element objectForKey:@"Size"] floatValue];
+            self.atomSize = [[element objectForKey:@"Size"] floatValue] / 2;
             self.atomSymbol = [element objectForKey:@"Symbol"];
+            self.bondThresholds = [element objectForKey:@"Bond Thresholds"];
         }
 
     }
     
     //create the sphere object
     SCNSphere *sphere = [SCNSphere sphereWithRadius:self.atomSize];
-    sphere.segmentCount = 45;
+    sphere.segmentCount = 35;
     SCNNode *spherenode = [SCNNode nodeWithGeometry:sphere];
     [self addChildNode:spherenode];
     //test.categoryBitMask = 0x1 << 5;
@@ -67,17 +71,14 @@
     
     SCNNode *symbolnode = [SCNNode node];
     [self addChildNode:symbolnode];
-    
-    //SCNPlane *plane = [SCNPlane planeWithWidth:symbol_size height:symbol_size];
-    //SCNNode *symboltest = [SCNNode nodeWithGeometry:plane];
-    
+
     SCNNode *symboltest = [SCNNode node];
     
     SCNMaterial *mat = [SCNMaterial material];
     mat.diffuse.contents = self.atomColor;
     mat.selfIllumination.contents = [UIColor whiteColor];// [UIImage imageNamed:glareimage];
     mat.blendMode = SCNBlendModeScreen;
-    mat.diffuse.intensity = 0.5;
+    mat.diffuse.intensity = 0.8;
     mat.writesToDepthBuffer = false;
     
     [symbolnode addChildNode:symboltest];
@@ -87,27 +88,37 @@
     SCNBillboardConstraint *look = [SCNBillboardConstraint billboardConstraint];
     symbolnode.constraints = @[look];
     
-    NSString *elementletters = self.atomSymbol;
-    SCNText *text = [SCNText textWithString:elementletters extrusionDepth:0];
-    text.alignmentMode = kCAAlignmentCenter;
-    text.flatness = 0;
-    text.font = [UIFont systemFontOfSize:1 weight:UIFontWeightBold];
-    //text.containerFrame = CGRectMake(-1, -1, 1, 1);
-    SCNNode *textnode = [SCNNode nodeWithGeometry:text];
-    textnode.geometry.materials = @[mat];
+//    NSString *elementletters = self.atomSymbol;
+//    SCNText *text = [SCNText textWithString:elementletters extrusionDepth:0];
+//    text.alignmentMode = kCAAlignmentCenter;
+//    text.flatness = 0;
+//    text.font = [UIFont systemFontOfSize:0.3 weight:UIFontWeightBold];
+//    //text.containerFrame = CGRectMake(-1, -1, 1, 1);
+//    SCNNode *textnode = [SCNNode nodeWithGeometry:text];
+//    textnode.geometry.materials = @[mat];
     
-    //get bounding box of text
-    SCNVector3 min = SCNVector3Zero;
-    SCNVector3 max = SCNVector3Zero;
-    [textnode.geometry getBoundingBoxMin:&min max:&max];
-    
-    CGSize sizeMax = CGSizeMake( max.x - min.x,
-                                max.y - min.y);
-    
-    textnode.position = SCNVector3Make(-sizeMax.width/2, -sizeMax.height*2, textnode.position.z);
-    
+//    SCNPlane *plane = [SCNPlane planeWithWidth:0.1 height:0.1];
+//    SCNNode *planenode = [SCNNode nodeWithGeometry:plane];
+//    [symboltest addChildNode:planenode];
+//    planenode.geometry.materials = @[mat];
 
-    [symboltest addChildNode:textnode];
+    
+//    //get bounding box of text
+//    SCNVector3 min = SCNVector3Zero;
+//    SCNVector3 max = SCNVector3Zero;
+//    [textnode.geometry getBoundingBoxMin:&min max:&max];
+//
+//    CGSize sizeMax = CGSizeMake( max.x - min.x,
+//                                max.y - min.y);
+//
+//    NSLog(@"size max y %f", sizeMax.height);
+//
+//    textnode.pivot = SCNMatrix4MakeTranslation(0, 0, 0);
+//    textnode.position = SCNVector3Make(0, 0, 0);
+//    //textnode.position = SCNVector3Make(-sizeMax.width/2, -sizeMax.height*4, textnode.position.z);
+//
+//
+//    [symboltest addChildNode:textnode];
     
 
 }

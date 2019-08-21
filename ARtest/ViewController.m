@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "Molecule.h"
+#import "Atom.h"
 #import "ReferenceGrid.h"
 
 @interface ViewController () <ARSCNViewDelegate, SCNSceneRendererDelegate, SKSceneDelegate, UIGestureRecognizerDelegate>
@@ -73,6 +74,7 @@
     self.referenceGrid = [ReferenceGrid node];
     [self.gameScene.rootNode addChildNode:self.referenceGrid];
     [self.referenceGrid generate];
+    [self.referenceGrid show];
     self.referenceGrid.position = self.floorNode.position;
 
     
@@ -180,18 +182,25 @@
     //use this for putting shadows on
     
     self.floor = [SCNFloor floor];
+    self.floor.reflectivity = 0;
+    
+    SCNPlane *plane = [SCNPlane planeWithWidth:2 height:2];
+    SCNNode *floortest = [SCNNode nodeWithGeometry:plane];
     
     SCNMaterial *floormat = [SCNMaterial material];
+    floormat.diffuse.contents = [UIColor whiteColor];
     floormat.writesToDepthBuffer = true;
-    floormat.diffuse.contents = [UIColor clearColor];
-    floormat.writesToDepthBuffer = true;
-    floormat.readsFromDepthBuffer = true;
-    //floormat.colorBufferWriteMask = [];
-    floormat.lightingModelName = SCNLightingModelConstant;
+    //floormat.readsFromDepthBuffer = true;
+    floormat.colorBufferWriteMask = SCNColorMaskAlpha;
+    floormat.lightingModelName = SCNLightingModelConstant;// SCNLightingModelShadowOnly;
     self.floor.materials = @[floormat];
+    floortest.geometry.materials = @[floormat];
     self.floorNode = [SCNNode nodeWithGeometry:self.floor];
-    [self.gameScene.rootNode addChildNode:self.floorNode];
+    [self.gameScene.rootNode addChildNode:floortest];
     
+    floortest.position = SCNVector3Make(0, -0.1, 0);
+    floortest.rotation = SCNVector4Make(1, 0, 0, -M_PI/2);
+
     self.floorNode.position = SCNVector3Make(0, -0.1, 0);
 }
 
@@ -235,10 +244,10 @@
     self.lightDirectional.castsShadow = true;
     self.lightDirectional.automaticallyAdjustsShadowProjection = true;
     self.lightDirectional.shadowSampleCount = 64;
-    self.lightDirectional.shadowRadius = 40;
+    self.lightDirectional.shadowRadius = 10;
     self.lightDirectional.shadowMode = SCNShadowModeDeferred;
     self.lightDirectional.shadowMapSize = CGSizeMake(1024, 1024);
-    self.lightDirectional.shadowColor = [UIColor colorWithWhite:0 alpha:0.75];
+    self.lightDirectional.shadowColor = [UIColor colorWithWhite:0 alpha:0.9];
     self.lightDirectionalNode.light = self.lightDirectional;
 
     self.lightDirectionalNode.position = SCNVector3Make(0, 100, 0);
@@ -274,14 +283,16 @@
 
     //generate the atoms and bonds
     
+    //add to scene
     [self.moleculesContainerNode addChildNode:molecule];
     
+    //get type
     molecule.moleculeType = [selectedmolecule objectForKey:@"Type"];
 
     //get array of atoms
     NSArray *atoms = [selectedmolecule objectForKey:@"Atoms"];
     
-    //parse array
+    //parse array and create atoms
     NSInteger atomindex = 0;
     for (NSDictionary *atom in atoms)
     {
@@ -296,34 +307,45 @@
         [molecule addAtomOfElement:element withId:atomId atX:x Y:y Z:z];
     }
     
-    //get array of bonds
-    NSArray *bonds = [selectedmolecule objectForKey:@"Bonds"];
     
-    //parse array
-    for (NSDictionary *bond in bonds)
-    {
-        NSInteger first = [[bond objectForKey:@"First"] intValue];
-        NSInteger second = [[bond objectForKey:@"Second"] intValue];
-        
-        [molecule addBondBetween:first and:second];
-    }
+    //method A
+    
+//    //get array of bonds
+//    NSArray *bonds = [selectedmolecule objectForKey:@"Bonds"];
+//
+//    //parse array
+//    for (NSDictionary *bond in bonds)
+//    {
+//        NSInteger first = [[bond objectForKey:@"First"] intValue];
+//        NSInteger second = [[bond objectForKey:@"Second"] intValue];
+//
+//        [molecule addBondBetween:first and:second];
+//    }
+    
+
+    //method B
+    [molecule generateBonds];
+    
+    //setup type and Id
     
     NSString *moleculeName = [selectedmolecule objectForKey:@"Type"];
     molecule.name = moleculeName;
     
     molecule.moleculeId = moleculeId;
-    //molecule.name = [NSString stringWithFormat:@"%ld", moleculeId];
     
     NSLog(@"Generated molecule for %@ and id %ld", moleculeName, moleculeId);
     
-    //initial scale
-    molecule.viewingScale = 0.01;
+    //set viewing scale
+    molecule.viewingScale = 0.05;
     molecule.scale = SCNVector3Make(molecule.viewingScale, molecule.viewingScale, molecule.viewingScale);
     
+    //prepare for animation
     [molecule setInitialState];
     
+    //add to array of current molecules in the scene
     [self.moleculesArray addObject:molecule];
 
+    //select
     self.currentMolecule = molecule;
     molecule.isSelected = YES;
     
@@ -455,27 +477,35 @@ float slide_y;
     {
         //basic little snippet to connect horizontal swiping to rotating the molecule
         //a better way to do it is to have rotation based on momentum that's a property that gets updated per frame
-        [self.currentMolecule animateSpin:NO];
         
-        CGPoint v = [gestureRecognizer velocityInView:self.view];
-        //float vmax = MIN( MAX(ABS(v.x), ABS(v.y)), 50);
-        
-        float vmax = 100;
-        float v_x = MAX(-vmax, MIN(v.x, vmax));
-        
-        //NSLog(@"%f", v_x);
-        
-        float rot = M_PI*2 * v_x * 0.0001;
-        SCNAction *rotate = [SCNAction rotateByX:0 y:rot z:0 duration:0.5];
-        rotate.timingMode = SCNActionTimingModeEaseOut;
-        [self.currentMolecule runAction:rotate];
-        
-        
-        //move
-        float move_y = slide_y * 0.001;
-        //NSLog(@"pixel %f world %f", slide_y, move_y);
+        if (ABS(slide_x) > 10)
+        {
+            [self.currentMolecule animateSpin:NO];
+            
+            CGPoint v = [gestureRecognizer velocityInView:self.view];
+            //float vmax = MIN( MAX(ABS(v.x), ABS(v.y)), 50);
+            
+            float vmax = 30;
+            float v_x = MAX(-vmax, MIN(v.x, vmax));
+            
+            //NSLog(@"%f", v_x);
+            
+            float rot = M_PI*2 * v_x * 0.0001;
+            SCNAction *rotate = [SCNAction rotateByX:0 y:rot z:0 duration:0.3];
+            rotate.timingMode = SCNActionTimingModeEaseOut;
+            [self.currentMolecule runAction:rotate];
+            
+        }
 
-        [self.currentMolecule adjustFloatingPositionBy:move_y];
+        if (ABS(slide_y) > 5)
+        {
+            //move
+            float move_y = slide_y * 0.0001;
+            //NSLog(@"pixel %f world %f", slide_y, move_y);
+
+            [self.currentMolecule adjustFloatingPositionBy:move_y];
+        }
+
     }
     
     else if (gestureRecognizer.numberOfTouches == 2) two_finger_slide = YES;
@@ -523,7 +553,7 @@ float pinchstartdistance;
 
             //float target_scale = 0.05 * pinch_factor;
             
-            float target_scale = MIN(0.02, MAX(0.005, self.currentMolecule.scale.x + pinch_factor));
+            float target_scale = MIN(0.1, MAX(0.05, self.currentMolecule.scale.x + pinch_factor));
             //self.currentMolecule.viewingScale = 0.01;
             
             //NSLog(@"pinch %f current scale %f target %f", pinch_factor, self.currentMolecule.scale.x, target_scale);
@@ -560,13 +590,15 @@ float pinchstartdistance;
 
 -(void)cameraDoubleTwoFingerTap:(UITapGestureRecognizer *)gestureRecognizer
 {
-    if (self.referenceGrid.isVisible)
-    {
-        [self.referenceGrid hide];
-    } else
-    {
-        [self.referenceGrid show];
-    }
+//    if (self.referenceGrid.isVisible)
+//    {
+//        [self.referenceGrid hide];
+//    } else
+//    {
+//        [self.referenceGrid show];
+//    }
+    
+    self.moleculeNameLabel.hidden = !self.moleculeNameLabel.hidden;
 }
 
 float moved_distance;

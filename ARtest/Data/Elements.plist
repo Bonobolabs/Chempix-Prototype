@@ -8,9 +8,30 @@
 		<key>Symbol</key>
 		<string>C</string>
 		<key>Size</key>
-		<integer>4</integer>
+		<real>0.91</real>
 		<key>Color</key>
 		<string>#1b2424</string>
+		<key>Bond Thresholds</key>
+		<array>
+			<dict>
+				<key>Element</key>
+				<string>Carbon</string>
+				<key>Threshold</key>
+				<real>1.5</real>
+			</dict>
+			<dict>
+				<key>Element</key>
+				<string>Oxygen</string>
+				<key>Threshold</key>
+				<real>1.1</real>
+			</dict>
+			<dict>
+				<key>Element</key>
+				<string>Hydrogen</string>
+				<key>Threshold</key>
+				<real>1.1</real>
+			</dict>
+		</array>
 	</dict>
 	<dict>
 		<key>Name</key>
@@ -18,9 +39,30 @@
 		<key>Symbol</key>
 		<string>O</string>
 		<key>Size</key>
-		<integer>2</integer>
+		<real>0.65</real>
 		<key>Color</key>
-		<string>#d7edf3</string>
+		<string>#bb354b</string>
+		<key>Bond Thresholds</key>
+		<array>
+			<dict>
+				<key>Element</key>
+				<string>Carbon</string>
+				<key>Threshold</key>
+				<real>1.5</real>
+			</dict>
+			<dict>
+				<key>Element</key>
+				<string>Oxygen</string>
+				<key>Threshold</key>
+				<real>1.1</real>
+			</dict>
+			<dict>
+				<key>Element</key>
+				<string>Hydrogen</string>
+				<key>Threshold</key>
+				<real>1.1</real>
+			</dict>
+		</array>
 	</dict>
 	<dict>
 		<key>Name</key>
@@ -28,9 +70,30 @@
 		<key>Symbol</key>
 		<string>H</string>
 		<key>Size</key>
-		<integer>3</integer>
+		<real>0.5</real>
 		<key>Color</key>
-		<string>#bb354b</string>
+		<string>#d7edf3</string>
+		<key>Bond Thresholds</key>
+		<array>
+			<dict>
+				<key>Element</key>
+				<string>Carbon</string>
+				<key>Threshold</key>
+				<real>1.5</real>
+			</dict>
+			<dict>
+				<key>Element</key>
+				<string>Oxygen</string>
+				<key>Threshold</key>
+				<real>1.1</real>
+			</dict>
+			<dict>
+				<key>Element</key>
+				<string>Hydrogen</string>
+				<key>Threshold</key>
+				<real>1.1</real>
+			</dict>
+		</array>
 	</dict>
 </array>
 </plist>

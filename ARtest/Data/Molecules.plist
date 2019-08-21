@@ -11,48 +11,33 @@
 			<array>
 				<dict>
 					<key>Element</key>
+					<string>Oxygen</string>
+					<key>X</key>
+					<integer>0</integer>
+					<key>Y</key>
+					<integer>0</integer>
+					<key>Z</key>
+					<real>-0.3727</real>
+				</dict>
+				<dict>
+					<key>Element</key>
 					<string>Hydrogen</string>
 					<key>X</key>
-					<integer>0</integer>
+					<real>-0.5645</real>
 					<key>Y</key>
 					<integer>0</integer>
 					<key>Z</key>
-					<integer>-2</integer>
+					<real>0.3727</real>
 				</dict>
 				<dict>
 					<key>Element</key>
-					<string>Oxygen</string>
+					<string>Hydrogen</string>
 					<key>X</key>
-					<integer>-5</integer>
+					<real>0.5645</real>
 					<key>Y</key>
 					<integer>0</integer>
 					<key>Z</key>
-					<integer>3</integer>
-				</dict>
-				<dict>
-					<key>Element</key>
-					<string>Oxygen</string>
-					<key>X</key>
-					<integer>5</integer>
-					<key>Y</key>
-					<integer>0</integer>
-					<key>Z</key>
-					<integer>3</integer>
-				</dict>
-			</array>
-			<key>Bonds</key>
-			<array>
-				<dict>
-					<key>First</key>
-					<integer>0</integer>
-					<key>Second</key>
-					<integer>1</integer>
-				</dict>
-				<dict>
-					<key>First</key>
-					<integer>0</integer>
-					<key>Second</key>
-					<integer>2</integer>
+					<real>0.3727</real>
 				</dict>
 			</array>
 		</dict>
@@ -65,94 +50,61 @@
 					<key>Element</key>
 					<string>Carbon</string>
 					<key>X</key>
-					<integer>-6</integer>
+					<real>0.35673483</real>
 					<key>Y</key>
-					<integer>0</integer>
+					<real>-0.05087227</real>
 					<key>Z</key>
-					<integer>0</integer>
+					<real>-0.47786734</real>
 				</dict>
 				<dict>
 					<key>Element</key>
 					<string>Carbon</string>
 					<key>X</key>
-					<integer>6</integer>
+					<real>1.61445821</real>
 					<key>Y</key>
-					<integer>0</integer>
+					<real>-0.06684946999999999</real>
 					<key>Z</key>
-					<integer>0</integer>
+					<real>-0.02916681</real>
 				</dict>
 				<dict>
 					<key>Element</key>
 					<string>Hydrogen</string>
 					<key>X</key>
-					<integer>-12</integer>
+					<real>-0.14997206</real>
 					<key>Y</key>
-					<integer>0</integer>
+					<real>0.87780529</real>
 					<key>Z</key>
-					<integer>-6</integer>
+					<real>-0.62680155</real>
 				</dict>
 				<dict>
 					<key>Element</key>
 					<string>Hydrogen</string>
 					<key>X</key>
-					<integer>-12</integer>
+					<real>-0.16786485</real>
 					<key>Y</key>
-					<integer>0</integer>
+					<real>-0.95561368</real>
 					<key>Z</key>
-					<integer>6</integer>
+					<real>-0.6942637</real>
 				</dict>
 				<dict>
 					<key>Element</key>
 					<string>Hydrogen</string>
 					<key>X</key>
-					<integer>12</integer>
+					<real>2.15270896</real>
 					<key>Y</key>
-					<integer>0</integer>
+					<real>0.8422107599999999</real>
 					<key>Z</key>
-					<integer>-6</integer>
+					<real>0.19314809</real>
 				</dict>
 				<dict>
 					<key>Element</key>
 					<string>Hydrogen</string>
 					<key>X</key>
-					<integer>12</integer>
+					<real>2.16553127</real>
 					<key>Y</key>
-					<integer>0</integer>
+					<real>-0.97886933</real>
 					<key>Z</key>
-					<integer>6</integer>
-				</dict>
-			</array>
-			<key>Bonds</key>
-			<array>
-				<dict>
-					<key>First</key>
-					<integer>0</integer>
-					<key>Second</key>
-					<integer>2</integer>
-				</dict>
-				<dict>
-					<key>First</key>
-					<integer>0</integer>
-					<key>Second</key>
-					<integer>3</integer>
-				</dict>
-				<dict>
-					<key>First</key>
-					<integer>0</integer>
-					<key>Second</key>
-					<integer>1</integer>
-				</dict>
-				<dict>
-					<key>First</key>
-					<integer>1</integer>
-					<key>Second</key>
-					<integer>4</integer>
-				</dict>
-				<dict>
-					<key>First</key>
-					<integer>1</integer>
-					<key>Second</key>
-					<integer>5</integer>
+					<real>0.15232587</real>
 				</dict>
 			</array>
 		</dict>
