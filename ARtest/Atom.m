@@ -121,6 +121,67 @@
 //    [symboltest addChildNode:textnode];
     
 
+    [self generateEnvelope];
+}
+
+-(void)generateEnvelope
+{
+    //create the sphere object
+    SCNSphere *sphere = [SCNSphere sphereWithRadius:self.atomSize*1.5];
+    sphere.segmentCount = 35;
+    SCNNode *spherenode = [SCNNode nodeWithGeometry:sphere];
+    [self addChildNode:spherenode];
+    //test.categoryBitMask = 0x1 << 5;
+    
+    SCNMaterial *mat = [SCNMaterial material];
+    
+    UIColor *positive_red = [UIColor colorFromHexString:@"bb354b"];
+    UIColor *negative_blue = [UIColor colorFromHexString:@"3d92ab"];
+
+    mat.lightingModelName = SCNLightingModelConstant;
+    mat.diffuse.contents = negative_blue;
+    mat.diffuse.intensity = 1;
+    mat.reflective.contents = [UIImage imageNamed:@"environment_sphere_2"];
+    mat.reflective.intensity = 1;
+//    mat.metalness.contents = [UIColor whiteColor];
+//    mat.metalness.intensity = 0.9;
+//    mat.roughness.contents = [UIImage imageNamed:@"roughness_1"];
+//    mat.roughness.intensity = 10;
+    mat.selfIllumination.contents = negative_blue;
+    mat.selfIllumination.intensity = 10;
+    mat.shininess = 0;
+    //mat.normal.contents = [UIImage imageNamed:@"scuffed-plastic-normal"];
+    //mat.normal.intensity = 1;
+    mat.transparency = 0.15;
+    mat.locksAmbientWithDiffuse = NO;
+    mat.doubleSided = NO;
+    mat.writesToDepthBuffer = true;
+    spherenode.geometry.materials = @[mat];
+    spherenode.renderingOrder = 1;
+    
+    //incease density as atom size increases
+    float density = 50 + self.atomSize * 3 * 50;
+    NSLog(@"density is %f for atom size %f", density, self.atomSize);
+    
+    SCNParticleSystem *particles = [SCNParticleSystem particleSystemNamed:@"Envelope_Particles" inDirectory:@""];
+    particles.emitterShape = sphere;
+    particles.warmupDuration = 5;
+    particles.birthRate = density;
+    //particles.birthRateVariation = density * 0.5;
+    particles.particleLifeSpan = 5;
+    particles.particleLifeSpanVariation = 0;
+    particles.particleVelocity = 0.001;
+    particles.particleVelocityVariation = 0;
+    particles.speedFactor = 1;
+    particles.particleSize = 0.0003;
+    particles.particleSizeVariation = 0;
+    particles.idleDuration = 0;
+    particles.idleDurationVariation = 0;
+    particles.particleColor = [UIColor whiteColor]; //
+    
+    [self addParticleSystem:particles];
+    
+    
 }
 
 

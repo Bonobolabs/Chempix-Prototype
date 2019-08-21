@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43562E80230D6AC500B55B29 /* Envelope_Particles.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 43562E7E230D6AC500B55B29 /* Envelope_Particles.scnp */; };
+		43562E81230D6AC500B55B29 /* electron.png in Resources */ = {isa = PBXBuildFile; fileRef = 43562E7F230D6AC500B55B29 /* electron.png */; };
 		F59EE87C23038C6A00605A39 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F59EE87B23038C6A00605A39 /* AppDelegate.m */; };
 		F59EE87E23038C6A00605A39 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F59EE87D23038C6A00605A39 /* art.scnassets */; };
 		F59EE88123038C6A00605A39 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59EE88023038C6A00605A39 /* ViewController.m */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		43562E7E230D6AC500B55B29 /* Envelope_Particles.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Envelope_Particles.scnp; sourceTree = "<group>"; };
+		43562E7F230D6AC500B55B29 /* electron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = electron.png; sourceTree = "<group>"; };
 		F59EE87723038C6A00605A39 /* ARtest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARtest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F59EE87A23038C6A00605A39 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F59EE87B23038C6A00605A39 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 				F59EE8B12305D85200605A39 /* Molecule.m */,
 				F59EE8B523069C9200605A39 /* Atom.h */,
 				F59EE8B623069C9200605A39 /* Atom.m */,
+				43562E7E230D6AC500B55B29 /* Envelope_Particles.scnp */,
+				43562E7F230D6AC500B55B29 /* electron.png */,
 				F59EE8C52309B5A100605A39 /* ReferenceGrid.h */,
 				F59EE8C62309B5A100605A39 /* ReferenceGrid.m */,
 				F59EE88223038C6A00605A39 /* Main.storyboard */,
@@ -282,8 +288,10 @@
 			files = (
 				F59EE87E23038C6A00605A39 /* art.scnassets in Resources */,
 				F59EE88923038C6C00605A39 /* LaunchScreen.storyboard in Resources */,
+				43562E80230D6AC500B55B29 /* Envelope_Particles.scnp in Resources */,
 				F59EE8B4230699DC00605A39 /* Molecules.plist in Resources */,
 				F59EE8C223090C7400605A39 /* Elements.plist in Resources */,
+				43562E81230D6AC500B55B29 /* electron.png in Resources */,
 				F59EE88623038C6C00605A39 /* Assets.xcassets in Resources */,
 				F59EE88423038C6A00605A39 /* Main.storyboard in Resources */,
 			);

@@ -247,7 +247,7 @@
     self.lightDirectional.shadowRadius = 10;
     self.lightDirectional.shadowMode = SCNShadowModeDeferred;
     self.lightDirectional.shadowMapSize = CGSizeMake(1024, 1024);
-    self.lightDirectional.shadowColor = [UIColor colorWithWhite:0 alpha:0.9];
+    self.lightDirectional.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
     self.lightDirectionalNode.light = self.lightDirectional;
 
     self.lightDirectionalNode.position = SCNVector3Make(0, 100, 0);
