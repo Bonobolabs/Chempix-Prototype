@@ -186,7 +186,7 @@
     
     //create cylinder
     SCNCylinder *cylinder = [SCNCylinder cylinderWithRadius:cylinder_radius height:cylinder_height];
-    cylinder.radialSegmentCount = 45;
+    cylinder.radialSegmentCount = 25;
     cylinder.heightSegmentCount = 1;
     
     SCNNode *cylindernode = [SCNNode nodeWithGeometry:cylinder];
@@ -201,14 +201,14 @@
     
     bond_mat.diffuse.contents = [UIColor colorFromHexString:@"#94a3a7"];
     bond_mat.diffuse.intensity = 1;
-    bond_mat.reflective.contents = [UIImage imageNamed:@"environment_sphere_2"];
+    bond_mat.reflective.contents = [UIImage imageNamed:@"environment_sphere"];
     bond_mat.reflective.intensity = 1;
     bond_mat.metalness.contents = [UIColor whiteColor];
     bond_mat.metalness.intensity = 0.9;
     bond_mat.roughness.contents = [UIImage imageNamed:@"roughness_1"];
     bond_mat.roughness.intensity = 5;
     bond_mat.shininess = 2;
-    bond_mat.normal.contents = [UIImage imageNamed:@"scuffed-plastic-normal"];
+    bond_mat.normal.contents = [UIImage imageNamed:@"normal_1"];
     bond_mat.normal.intensity = 1;
     //bond_mat.transparency = 0.9;
     bond_mat.locksAmbientWithDiffuse = NO;
@@ -224,7 +224,7 @@
     float start_cone_height = start_cone_size;
     
     SCNCone *startcone = [SCNCone coneWithTopRadius:start_cone_top_radius bottomRadius:start_cone_bottom_radius height:start_cone_height];
-    startcone.radialSegmentCount = 45;
+    startcone.radialSegmentCount = 25;
     startcone.heightSegmentCount = 1;
     
     SCNNode *weldstartnode = [SCNNode nodeWithGeometry:startcone];
@@ -243,7 +243,7 @@
     float end_cone_height = end_cone_size * 2;
     
     SCNCone *endcone = [SCNCone coneWithTopRadius:end_cone_top_radius bottomRadius:end_cone_bottom_radius height:end_cone_height];
-    endcone.radialSegmentCount = 45;
+    endcone.radialSegmentCount = 25;
     endcone.heightSegmentCount = 1;
     
     SCNNode *weldendnode = [SCNNode nodeWithGeometry:endcone];
